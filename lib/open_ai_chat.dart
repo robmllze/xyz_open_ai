@@ -10,6 +10,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:xyz_open_ai/open_ai_chat_role.dart';
 
 import 'open_ai_gpt_model.dart';
 
@@ -110,14 +111,6 @@ String extractContentFromJson(Map<String, dynamic> jsonData) {
     }
   }
   return "";
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-enum OpenAiChatRole {
-  ASSISTANT,
-  USER,
-  SYSTEM,
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

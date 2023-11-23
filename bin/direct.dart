@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:xyz_open_ai/open_ai_chat.dart';
+import 'package:xyz_open_ai/open_ai_chat_role.dart';
 import 'package:xyz_open_ai/open_ai_gpt_model.dart';
 
 void main() async {
