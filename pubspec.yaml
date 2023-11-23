@@ -1,0 +1,17 @@
+name: xyz_open_ai
+description:
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: ^3.1.5
+dependencies:
+  http: ^1.1.0
+  shelf_router: ^1.1.4
+  xml: ^6.4.2
+  html:
+  mime:
+  archive:
+  js:
+dev_dependencies:
+  build_runner: ^2.4.0
+  build_web_compilers: ^4.0.0
