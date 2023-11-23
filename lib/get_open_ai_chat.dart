@@ -3,11 +3,12 @@ import 'package:http/http.dart' as http; // import the http package
 import 'dart:async';
 import 'dart:convert';
 
-Future<String> getOpenAiChat(
-  String apiKey, // the OpenAI API key to be used
-  List<ModelMessage> messages,
-  int worldLimit,
-) async {
+Future<String> getOpenAiChat({
+  required String apiKey,
+  required List<ModelMessage> messages,
+  int worldLimit = 16000,
+  String model = "gpt-3.5-turbo",
+}) async {
   final mappedMessages = trimMessageHistory(messages, worldLimit)
       .map((e) => {"role": e.role, "content": e.content})
       .toList();
