@@ -66,7 +66,8 @@ class ModelMessage {
     role = json["role"];
     content = json["content"];
     id = json["id"];
-    timestamp = json["timestamp"];
+    final temp = json["timestamp"];
+    timestamp = temp is int ? temp : 0;
   }
 
   Map<String, dynamic> toJson() {
