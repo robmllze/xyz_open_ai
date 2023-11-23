@@ -14,7 +14,7 @@ Future<String> getOpenAiChat({
       .toList();
   final data = {
     'messages': mappedMessages,
-    'model': "gpt-3.5-turbo", // the GPT-3 model to be used
+    'model': model,
   };
 
   final headers = {
