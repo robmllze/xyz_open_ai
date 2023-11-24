@@ -1,24 +1,46 @@
-import 'dart:convert';
+//.title
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//
+// XYZ AI
+//
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:xyz_open_ai/utils/general.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 void main() async {
-  var url = Uri.parse('http://localhost:8080/count_to_10');
-  var client = http.Client();
+  final url = Uri(
+    scheme: "http",
+    host: "localhost",
+    port: 8080,
+    path: "/count_to_10",
+  );
+  final client = http.Client();
   try {
-    var request = http.Request('GET', url);
-    var response = await client.send(request);
-
-    response.stream.transform(const Utf8Decoder()).transform(const LineSplitter()).listen((data) {
-      print(data);
-    }, onDone: () {
-      client.close();
-    }, onError: (e) {
-      print(e);
-      client.close();
-    });
+    final request = http.Request("GET", url);
+    final response = await client.send(request);
+    final stream = response.stream.transform(const Utf8Decoder()).transform(const LineSplitter());
+    stream.listen(
+      (data) {
+        final count = fromServerData(data).firstOrNull;
+        stdout.write(count);
+      },
+      onDone: () {
+        client.close();
+      },
+      onError: (e) {
+        stdout.writeln(e);
+        client.close();
+      },
+    );
   } catch (e) {
-    print('Error: $e');
+    stderr.writeln(e);
     client.close();
   }
 }

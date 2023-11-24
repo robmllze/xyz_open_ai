@@ -1,10 +1,29 @@
+#.title
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##
+## XYZ Open AI
+##
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+#.title~
+
 name: xyz_open_ai
 description:
 version: 0.1.0
 publish_to: none
+
+## -----------------------------------------------------------------------------
+
 environment:
   sdk: ^3.1.5
+
+## -----------------------------------------------------------------------------
+
 dependencies:
+
+  xyz_utils:
+    git:
+      url: https://github.com/robmllze/xyz_utils.git
+
   http:
   shelf_router:
   xml:
@@ -12,6 +31,15 @@ dependencies:
   mime:
   archive:
   js:
+
+## -----------------------------------------------------------------------------
+
 dev_dependencies:
+
   build_runner: ^2.4.0
   build_web_compilers: ^4.0.0
+  lints:
+
+  xyz_gen:
+    git:
+      url: https://github.com/robmllze/xyz_gen.git
