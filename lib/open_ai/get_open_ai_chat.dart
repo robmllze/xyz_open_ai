@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http; // import the http package
 import 'dart:async';
 import 'dart:convert';
 
-import '../xyz_ai.dart';
+import '../../xyz_ai.dart';
 
 Future<String> getOpenAiChat({
   required String apiKey,
