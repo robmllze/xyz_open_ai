@@ -1,0 +1,1 @@
+curl -N http://localhost:8081/chat

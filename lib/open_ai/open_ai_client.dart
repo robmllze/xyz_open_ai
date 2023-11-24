@@ -11,8 +11,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'open_ai_chat_role.dart';
-import 'open_ai_gpt_model.dart';
+import 'chat_role.dart';
+import 'gpt_models.dart';
 
 class OpenAIClient {
   //
@@ -34,7 +34,7 @@ class OpenAIClient {
   Stream<String> getOpenAiChatCompletionStream({
     required List<ChatMessage> messages,
     int maxTokens = 2000,
-    GPTModel model = OpenAiGptModels.gpt3_5_turbo_16k,
+    GPTModel model = GPTModels.gpt3_5_turbo_16k,
     double temperature = 0.7,
     void Function(String)? onData,
   }) async* {

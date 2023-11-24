@@ -8,10 +8,7 @@
 
 import 'dart:io';
 
-import 'package:xyz_open_ai/open_ai_chat.dart';
-import 'package:xyz_open_ai/open_ai_chat_role.dart';
-import 'package:xyz_open_ai/open_ai_gpt_model.dart';
-import 'package:xyz_open_ai/test_data/alcoholic_drinks.dart';
+import 'package:xyz_open_ai/xyz_ai.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

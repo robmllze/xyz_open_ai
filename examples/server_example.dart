@@ -9,7 +9,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:xyz_open_ai/utils/general.dart';
+import 'package:xyz_open_ai/xyz_ai.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
