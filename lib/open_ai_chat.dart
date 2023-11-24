@@ -10,11 +10,11 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:xyz_open_ai/open_ai_chat_role.dart';
 
+import 'open_ai_chat_role.dart';
 import 'open_ai_gpt_model.dart';
 
-class OpenAiChat {
+class OpenAIClient {
   //
   //
   //
@@ -25,22 +25,23 @@ class OpenAiChat {
   //
   //
 
-  OpenAiChat({required this.apiKey});
+  OpenAIClient({required this.apiKey});
 
   //
   //
   //
 
   Stream<String> getOpenAiChatCompletionStream({
-    required List<OpenAiChatMessage> messages,
+    required List<ChatMessage> messages,
     int maxTokens = 2000,
-    OpenAiGptModel model = OpenAiGptModels.gpt3_5_turbo_16k,
+    GPTModel model = OpenAiGptModels.gpt3_5_turbo_16k,
     double temperature = 0.7,
-    void Function(String buffer)? onData,
+    void Function(String)? onData,
   }) async* {
     assert(messages.isNotEmpty);
-    assert(maxTokens > 0 && maxTokens <= model.maxTokens);
+    assert(maxTokens > 0 && (model.maxTokens == null || maxTokens <= model.maxTokens!));
     assert(temperature > 0 && temperature <= 2.0);
+
     final uri = Uri.parse("https://api.openai.com/v1/chat/completions");
 
     var requestOptions = {
@@ -62,25 +63,25 @@ class OpenAiChat {
 
     try {
       var streamedResponse = await client.send(request);
-      String buffer = "";
-      String partialData = "";
+      var buffer = "";
+      var partialData = "";
 
       await for (var data in streamedResponse.stream.transform(utf8.decoder)) {
         buffer += data;
         var startIndex = 0;
-        var endIndex;
+        var endIndex = 0;
 
         while ((endIndex = buffer.indexOf("data:", startIndex)) != -1) {
           partialData = buffer.substring(startIndex, endIndex).trim();
           if (partialData.isNotEmpty) {
             final json = extractJsonFromSSEMessage(partialData);
             final content = extractContentFromJson(json);
-            onData?.call(content); // Callback with each piece of data
-            yield content; // Yield the content
+            onData?.call(content);
+            yield content;
           }
           startIndex = endIndex + 5;
         }
-        buffer = buffer.substring(startIndex); // Keep the remaining part for the next iteration
+        buffer = buffer.substring(startIndex);
       }
     } catch (e) {
       print("Error: $e");
@@ -113,10 +114,10 @@ String extractContentFromJson(Map<String, dynamic> jsonData) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class OpenAiChatMessage {
-  final OpenAiChatRole role;
+class ChatMessage {
+  final ChatRole role;
   final String content;
-  OpenAiChatMessage({
+  ChatMessage({
     required this.role,
     required this.content,
   });
@@ -132,7 +133,7 @@ class OpenAiChatMessage {
     return const JsonEncoder().convert(this.toJson());
   }
 
-  static String messagesToComponent(List<OpenAiChatMessage> messages) {
+  static String messagesToComponent(List<ChatMessage> messages) {
     final commaSeparated = messages.map((e) => e.toJsonString()).join(",");
     final jsonString = '{"value":[$commaSeparated]}';
     return jsonString;

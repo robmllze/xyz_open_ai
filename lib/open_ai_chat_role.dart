@@ -1,12 +1,12 @@
-enum OpenAiChatRole {
+enum ChatRole {
   ASSISTANT,
   USER,
   SYSTEM,
 }
 
-OpenAiChatRole? nameToOpenAiChatRole(String? name) {
+ChatRole? nameToOpenAiChatRole(String? name) {
   if (name != null) {
-    for (final a in OpenAiChatRole.values) {
+    for (final a in ChatRole.values) {
       if (name.trim().toLowerCase() == a.name.toLowerCase()) {
         return a;
       }

@@ -1,34 +1,4 @@
-import 'dart:io';
-
-import 'package:xyz_open_ai/open_ai_chat.dart';
-import 'package:xyz_open_ai/open_ai_chat_role.dart';
-import 'package:xyz_open_ai/open_ai_gpt_model.dart';
-
-void main() async {
-  print("Word count: ${wikiPediaData.split(" ").length}");
-  final chat = OpenAiChat(apiKey: "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");
-  final stream = chat.getOpenAiChatCompletionStream(
-      maxTokens: 3000,
-      model: OpenAiGptModel(
-        name: "gpt-4-1106-preview",
-        description: "",
-        maxTokens: 128000,
-        trainingData: "",
-      ),
-      messages: [
-        OpenAiChatMessage(
-            role: OpenAiChatRole.SYSTEM,
-            content: "You're a function that takes text and summarizes it."),
-        OpenAiChatMessage(
-            role: OpenAiChatRole.USER, content: "Summarize the following: $wikiPediaData"),
-      ],
-      onData: (buffer) {
-        stdout.write(buffer);
-      });
-  stream.listen((event) {});
-}
-
-final wikiPediaData = """
+const TEST_DATA__ALCOHOLIC_DRINKS = """
 
 Main menu
 

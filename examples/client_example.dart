@@ -6,7 +6,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -28,7 +27,7 @@ void main() async {
     final stream = response.stream.transform(const Utf8Decoder()).transform(const LineSplitter());
     stream.listen(
       (data) {
-        final count = fromServerData(data).firstOrNull;
+        final count = sseMessagesToData(data).firstOrNull;
         stdout.write(count);
       },
       onDone: () {

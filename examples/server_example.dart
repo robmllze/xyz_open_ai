@@ -36,7 +36,7 @@ void handleInvalidRequest(HttpRequest request) {
   final path = request.uri.path;
   response
     ..statusCode = HttpStatus.notFound
-    ..write("Invalid request: $path")
+    ..write("[HTTP Server] Invalid request: $path")
     ..close();
 }
 
@@ -52,7 +52,7 @@ Future<void> handleCountTo10Request(HttpRequest request) async {
   var count = 1;
   Timer.periodic(const Duration(seconds: 1), (Timer timer) {
     if (count <= 10) {
-      response.write(toServerData(count));
+      response.write(dataToSseMessage(count));
       count++;
     } else {
       timer.cancel();

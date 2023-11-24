@@ -8,8 +8,8 @@
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-String toServerData(dynamic data) => "data: $data\n\n";
+String dataToSseMessage(dynamic data) => "data: $data\n\n";
 
-Iterable fromServerData(String data) {
-  return data.split("\n\n").map((e) => e.split(":").last.trim());
+Iterable sseMessagesToData(String sseMessages) {
+  return sseMessages.split("\n\n").map((e) => e.split(":").last.trim());
 }
