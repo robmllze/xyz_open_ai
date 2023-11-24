@@ -684,7 +684,7 @@ packages:
     source: hosted
     version: "6.3.0"
   xyz_gen:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       path: "."
       ref: HEAD
